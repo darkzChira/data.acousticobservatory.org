@@ -1,0 +1,8 @@
+{{- $items := . -}}
+{{- if gt (len $items) 0 -}}
+<section class="ecoregion-grid" aria-label="Ecoregion tiles">
+  {{- range $items }}
+    {{ partial "tile-card.html" (dict "href" .href "image" .image "title" .title "summary" .description) }}
+  {{- end }}
+</section>
+{{- end -}}

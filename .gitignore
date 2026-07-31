@@ -1,0 +1,29 @@
+# Hugo build output
+landing_site/public/
+landing_site/public-verify/
+landing_site/resources/
+landing_site/.hugo_build.lock
+
+# WordPress backup files (large binaries - not for VCS)
+*.tar.gz
+*.zip
+*.xml
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Node (if any tooling is added)
+node_modules/
+
+# WordPress plugin/system junk not needed for the static site
+landing_site/static/wp-content/uploads/GeoLite2-Country.mmdb
+landing_site/static/wp-content/uploads/maxmegamenu/
+landing_site/static/wp-content/uploads/woocommerce*/
+landing_site/static/wp-content/uploads/woocommerce_uploads/
+landing_site/static/wp-content/uploads/wpcf7_uploads/

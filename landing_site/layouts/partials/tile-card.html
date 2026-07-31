@@ -1,0 +1,19 @@
+{{- $title := .title -}}
+{{- $href := .href -}}
+{{- $image := .image -}}
+{{- $summary := .summary -}}
+{{- $class := .class | default "" -}}
+{{- $attrs := .attrs | default "" -}}
+<article class="tile-card {{ $class }}"{{ with $attrs }} {{ . | safeHTMLAttr }}{{ end }}>
+  <a class="tile-card__media" href="{{ $href }}">
+    {{- if $image }}
+      <img src="{{ $image }}" alt="{{ $title }}" loading="lazy">
+    {{- end }}
+  </a>
+  <div class="tile-card__body">
+    <h3><a href="{{ $href }}">{{ $title }}</a></h3>
+    {{- if $summary }}
+      <p>{{ $summary | plainify | truncate 140 }}</p>
+    {{- end }}
+  </div>
+</article>

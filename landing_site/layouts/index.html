@@ -1,0 +1,86 @@
+{{ define "main" }}
+  <section class="hero-carousel" aria-label="Featured pages">
+    <div class="hero-carousel__track">
+      <article class="hero-slide">
+        <img src="/wp-content/uploads/2019/06/RHFFox-Armidale-4.jpg" alt="Providing accessible ecological data">
+        <div class="hero-slide__caption">
+          <a class="hero-slide__title" href="/providing-accessible-ecological-data/">Providing accessible ecological data</a>
+        </div>
+      </article>
+      <article class="hero-slide">
+        <img src="/wp-content/uploads/2019/06/Kookaburra-Armidale.jpg" alt="Recording across multiple ecoregions">
+        <div class="hero-slide__caption">
+          <a class="hero-slide__title" href="/recording-across-multiple-ecoregions/">Recording across multiple ecoregions</a>
+        </div>
+      </article>
+      <article class="hero-slide">
+        <img src="/wp-content/uploads/2019/10/IMG_20190422_142610733_HDR_sensor-crop.jpg" alt="Innovative acoustic technology">
+        <div class="hero-slide__caption">
+          <a class="hero-slide__title" href="/innovative-ecological-technology/">Innovative acoustic technology</a>
+        </div>
+      </article>
+    </div>
+    <button class="hero-carousel__arrow hero-carousel__arrow--prev" type="button" aria-label="Show previous slide">
+      <span class="fa fa-angle-left" aria-hidden="true"></span>
+    </button>
+    <button class="hero-carousel__arrow hero-carousel__arrow--next" type="button" aria-label="Show next slide">
+      <span class="fa fa-angle-right" aria-hidden="true"></span>
+    </button>
+  </section>
+
+  <section class="feature-band feature-band--light">
+    <div class="layout-shell">
+      <header class="section-header">
+        <h2>The Australian Acoustic Observatory</h2>
+        <div class="section-header__divider"><span><i class="fa fa-circle" aria-hidden="true"></i></span></div>
+        <p>The Australian Acoustic Observatory is a continental-scale acoustic sensor network, recording for a five-year period across multiple Australian ecosystems. The data are freely available to researchers, citizen scientists, and the general public. The A2O was funded by the Australian Research Council, grant LE170100033.</p>
+        <p class="section-header__meta">90 sites, 7 ecoregions &amp; over 40 participants</p>
+      </header>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true"><span class="fa fa-compass"></span></div>
+          <h3><a href="/sites/">Sites and Map</a></h3>
+          <a class="feature-card__link" href="/sites/">Know more <span class="fa fa-angle-double-right"></span></a>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true"><span class="fa fa-leaf"></span></div>
+          <h3><a href="/ecoregions/">Ecoregions</a></h3>
+          <a class="feature-card__link" href="/ecoregions/">Know more <span class="fa fa-angle-double-right"></span></a>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true"><span class="fa fa-microphone"></span></div>
+          <h3><a href="/participants/">Participants</a></h3>
+          <a class="feature-card__link" href="/participants/">Know more <span class="fa fa-angle-double-right"></span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="video-band">
+    <div class="layout-shell">
+      <header class="section-header section-header--light">
+        <h2>The world's first national acoustic observatory</h2>
+        <div class="section-header__divider"><span><i class="fa fa-circle" aria-hidden="true"></i></span></div>
+      </header>
+      <div class="video-frame">
+        <iframe title="The Australian Acoustic Observatory" width="560" height="315" src="https://www.youtube.com/embed/i0LE1gVTW-U" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-band feature-band--light feature-band--light-alt">
+    <div class="layout-shell">
+      <header class="section-header">
+        <h2>Find Data</h2>
+        <div class="section-header__divider"><span><i class="fa fa-circle" aria-hidden="true"></i></span></div>
+        <p>You can find data by site, ecoregion or participant. You can also browse sites and audio recordings without signing in. To participate in the analysis work you will need to log in or register for a new account on the A2O data portal. To learn more, click the find data button below.</p>
+      </header>
+      <article class="find-data-card">
+        <a href="/data/find-data/" class="find-data-card__media">
+          <img src="/wp-content/uploads/2019/06/cropped-RHFFox-Armidale-4.jpg" alt="Find data">
+        </a>
+        <h3><a href="/data/find-data/">Find data</a></h3>
+      </article>
+    </div>
+  </section>
+{{ end }}

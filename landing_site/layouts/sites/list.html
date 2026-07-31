@@ -1,0 +1,67 @@
+{{ define "main" }}
+  <article class="page page--sites">
+    <header>
+      <h1>{{ .Title }}</h1>
+    </header>
+
+    <div class="entry-content">
+      {{ .Content }}
+    </div>
+
+    <section class="site-directory" aria-labelledby="site-directory-heading">
+      <h2 id="site-directory-heading">Site pages</h2>
+      <form class="inline-search site-directory__search" action="{{ .RelPermalink }}" method="get" role="search">
+        <label for="site-directory-filter" class="visually-hidden">Filter site pages</label>
+        <input id="site-directory-filter" type="search" name="q" placeholder="Filter site pages">
+        <button type="submit">Filter</button>
+      </form>
+      <div class="site-directory__grid">
+        {{ range sort .RegularPages "Title" }}
+          {{ $regionID := replaceRE `.*\((\d+)\)$` `$1` .Title }}
+          {{ $image := index (.Params.images | default (slice)) 0 | default "" }}
+          {{ partial "tile-card.html" (dict "href" .RelPermalink "image" $image "title" .Title "summary" (.Params.summary | default "Loading site details…") "class" "site-card" "attrs" (printf `data-title="%s" data-region-id="%s" data-ecoregion="%s"` (lower .Title) $regionID (lower (.Params.ecoregion | default "")))) }}
+        {{ end }}
+      </div>
+      <p class="site-directory__empty" hidden>No site pages match this filter.</p>
+    </section>
+
+    <script>
+      (function () {
+        var root = document.querySelector(".site-directory");
+        if (!root) return;
+
+        var input = root.querySelector("#site-directory-filter");
+        var cards = Array.prototype.slice.call(root.querySelectorAll(".site-card"));
+        var emptyState = root.querySelector(".site-directory__empty");
+        var query = new URLSearchParams(window.location.search).get("q") || "";
+
+        function normalize(value) {
+          return String(value || "").trim().toLowerCase();
+        }
+
+        function applyFilter() {
+          var needle = normalize(input.value);
+          var visibleCount = 0;
+
+          cards.forEach(function (card) {
+            var title = normalize(card.dataset.title);
+            var regionName = normalize(card.dataset.regionName);
+            var ecoregion = normalize(card.dataset.ecoregion);
+            var matches = !needle || title.indexOf(needle) !== -1 || regionName.indexOf(needle) !== -1 || ecoregion.indexOf(needle) !== -1;
+
+            card.hidden = !matches;
+            if (matches) visibleCount += 1;
+          });
+
+          if (emptyState) {
+            emptyState.hidden = visibleCount !== 0;
+          }
+        }
+
+        input.value = query;
+        applyFilter();
+        input.addEventListener("input", applyFilter);
+      })();
+    </script>
+  </article>
+{{ end }}

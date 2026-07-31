@@ -1,0 +1,39 @@
+baseURL = "https://acousticobservatory.org/"
+languageCode = "en-au"
+title = "Australian Acoustic Observatory | A2O"
+
+refLinksErrorLevel = "ERROR"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  description = "Australian Acoustic Observatory (A2O) is a continental-scale acoustic sensor network, recording for a five-year period across multiple Australian ecosystems."
+
+[menu]
+  [[menu.main]]
+    name = "About the A2O"
+    url = "/home_1/"
+    weight = 10
+  [[menu.main]]
+    name = "Data"
+    url = "/data/"
+    weight = 20
+  [[menu.main]]
+    name = "Research"
+    url = "/use-cases/"
+    weight = 30
+  [[menu.main]]
+    name = "Media"
+    url = "/publications-and-media/media/"
+    weight = 40
+  [[menu.main]]
+    name = "Blog"
+    url = "/blog-2/"
+    weight = 50
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 60

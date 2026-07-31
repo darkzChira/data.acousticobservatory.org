@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/design-system.css">
+</head>
+<body>
+  {{ partial "header.html" . }}
+  <main id="main-content" class="site-main">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  <script>
+    (function () {
+      var toggle = document.querySelector(".menu-toggle");
+      var body = document.body;
+      if (!toggle) return;
+      toggle.addEventListener("click", function () {
+        var isOpen = body.classList.toggle("nav-open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+      });
+    })();
+
+    (function () {
+      var carousel = document.querySelector(".hero-carousel");
+      if (!carousel) return;
+
+      var slides = carousel.querySelectorAll(".hero-slide");
+      if (!slides.length) return;
+
+      var prevButton = carousel.querySelector(".hero-carousel__arrow--prev");
+      var nextButton = carousel.querySelector(".hero-carousel__arrow--next");
+      var currentIndex = 0;
+      var autoplayId = null;
+      var autoplayDelayMs = 6500;
+
+      function setSlide(nextIndex) {
+        currentIndex = (nextIndex + slides.length) % slides.length;
+        slides.forEach(function (slide, index) {
+          var isActive = index === currentIndex;
+          slide.classList.toggle("is-active", isActive);
+          slide.setAttribute("aria-hidden", String(!isActive));
+        });
+      }
+
+      function startAutoplay() {
+        if (slides.length < 2 || autoplayId !== null) return;
+        autoplayId = window.setInterval(function () {
+          setSlide(currentIndex + 1);
+        }, autoplayDelayMs);
+      }
+
+      function resetAutoplay() {
+        if (autoplayId !== null) {
+          window.clearInterval(autoplayId);
+          autoplayId = null;
+        }
+        startAutoplay();
+      }
+
+      carousel.classList.add("is-ready");
+      setSlide(0);
+      startAutoplay();
+
+      if (prevButton) {
+        prevButton.addEventListener("click", function () {
+          setSlide(currentIndex - 1);
+          resetAutoplay();
+        });
+      }
+
+      if (nextButton) {
+        nextButton.addEventListener("click", function () {
+          setSlide(currentIndex + 1);
+          resetAutoplay();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

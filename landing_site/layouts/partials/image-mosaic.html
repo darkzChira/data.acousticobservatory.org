@@ -1,0 +1,10 @@
+{{- $images := .images -}}
+{{- if gt (len $images) 0 -}}
+<div class="image-mosaic">
+  {{- range $images }}
+    <figure class="image-mosaic__item">
+      <img src="{{ . }}" alt="{{ $.title }}" loading="lazy">
+    </figure>
+  {{- end }}
+</div>
+{{- end -}}
