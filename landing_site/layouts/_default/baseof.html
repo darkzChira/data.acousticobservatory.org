@@ -9,7 +9,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/css/design-system.css">
+  {{- $sources := slice
+    (resources.Get "css/design-system.css")
+    (resources.Get "css/typography.css")
+    (resources.Get "css/footer.css")
+  }}
+  {{- $css := $sources | resources.Concat "css/site.css" }}
+  {{- if hugo.IsProduction }}
+    {{- $css = $css | minify | fingerprint | resources.PostProcess }}
+  {{- end }}
+  <link href="{{ $css.RelPermalink }}" rel="stylesheet">
 </head>
 <body>
   {{ partial "header.html" . }}
