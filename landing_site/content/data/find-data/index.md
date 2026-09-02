@@ -113,7 +113,7 @@ url: "/data/find-data/"
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">How to cite</h3>
+<h3 class="wp-block-heading" id="how-to-cite">How to cite</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
