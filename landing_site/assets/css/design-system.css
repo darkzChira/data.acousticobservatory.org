@@ -5,7 +5,7 @@
   --ink: #4b494f;
   --ink-strong: #111827;
   --brand: #304f3b;
-  --button-hover: #203529;
+  --button-hover: color-mix(in oklab, var(--brand), black 20%);
   --border: #d8dfe7;
   --dark: #202a3b;
   --dark-muted: #2c3544;
@@ -74,8 +74,7 @@ iframe {
 }
 
 .layout-shell {
-  max-width: var(--shell);
-  width: calc(100% - 2rem);
+  width: min(var(--shell), calc(100% - 2rem));
   margin: 0 auto;
 }
 
@@ -439,8 +438,7 @@ iframe {
 }
 
 .page {
-  max-width: 1170px;
-  width: calc(100% - 2rem);
+  width: min(1170px, calc(100% - 2rem));
   margin: 2.5rem auto 0;
   padding: 0 1rem;
 }
@@ -723,6 +721,3 @@ input[type="submit"] {
     padding: 0.6rem 0.8rem;
   }
 }
-
-@import "typography";
-@import "footer";

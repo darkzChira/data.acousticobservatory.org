@@ -14,9 +14,6 @@
   src: url("https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq6R9WXh0pg.woff2") format("woff2");
 }
 
-/*
- * Open Ecoacoustics design system typography.
- */
 :root {
   --ao-font-sans: "Montserrat", sans-serif;
   --ao-font-size-h1: 48px;
