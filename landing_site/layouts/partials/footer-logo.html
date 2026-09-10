@@ -1,0 +1,12 @@
+{{- $src := .src -}}
+{{- if strings.HasSuffix (lower $src) ".svg" -}}
+  {{- $path := printf "static/%s" (strings.TrimPrefix "/" $src) -}}
+  <span class="inline-svg" role="img" aria-label="{{ .alt }}">
+    <template shadowrootmode="open">
+      <style>svg { display: block; height: 100%; width: 100%; }</style>
+      {{- os.ReadFile $path | safeHTML -}}
+    </template>
+  </span>
+{{- else -}}
+  <img src="{{ $src | relURL }}" alt="{{ .alt }}">
+{{- end -}}

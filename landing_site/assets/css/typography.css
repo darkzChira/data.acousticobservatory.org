@@ -82,6 +82,11 @@ h4 {
   line-height: var(--ao-line-height-h4);
 }
 
+.type-body {
+  font-size: var(--ao-font-size-body);
+  line-height: var(--ao-line-height-body);
+}
+
 .type-small,
 small {
   font-size: var(--ao-font-size-small);

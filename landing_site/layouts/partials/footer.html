@@ -1,47 +1,77 @@
 {{ with .Site.GetPage "/footer" }}
 <footer class="site-footer">
-  <div class="site-footer__main">
+  <section class="primary">
     <div class="layout-shell">
-      <div class="footer-intro">
-        <p>{{ .Params.relationship }}</p>
-        <a class="footer-platform-logo" href="{{ .Params.platform.href }}" rel="external">
-          <img src="{{ .Params.platform.image | relURL }}" alt="{{ .Params.platform.label }}">
+      <div class="footer-acknowledgement">
+        <a class="footer-ao-logo" href="{{ .Params.project.href | relURL }}" aria-label="{{ .Params.project.label }}">
+          <img src="{{ .Params.project.image | relURL }}" alt="{{ .Params.project.label }}">
         </a>
+        <div class="acknowledgement-text">
+          {{ range .Params.acknowledgement }}
+            <p>{{ . }}</p>
+          {{ end }}
+        </div>
       </div>
 
-      <div class="footer-partners" aria-label="Project partners">
-        {{ range .Params.partners }}
-          <a href="{{ .href }}"{{ if (urls.Parse .href).IsAbs }} rel="external"{{ end }}>
-            <img src="{{ .image | relURL }}" alt="{{ .alt }}">
+      <div class="ao-partners">
+        {{ range $groupIndex, $group := .Params.partner_groups }}
+          {{ $groupID := printf "footer-group-%d" $groupIndex }}
+          <section class="ao-partner-group" aria-labelledby="{{ $groupID }}">
+            <h2 class="type-body" id="{{ $groupID }}">{{ $group.title }}</h2>
+            <div class="ao-partners-logos">
+              {{ range $group.partners }}
+                <a class="ao-partner-logo" href="{{ .href }}" rel="external">
+                  {{ partial "footer-logo.html" (dict "src" .image "alt" .alt) }}
+                </a>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+
+        <nav class="footer-ao-quicklinks" aria-label="Quick links">
+          <ul>
+            {{ range .Params.quicklinks }}
+              {{ $external := (urls.Parse .href).IsAbs }}
+              <li><a href="{{ if $external }}{{ .href }}{{ else }}{{ .href | relURL }}{{ end }}"{{ if $external }} rel="external"{{ end }}>{{ .label }}</a></li>
+            {{ end }}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section class="secondary">
+    <div class="layout-shell">
+      <div class="oe-partners" aria-label="Open Ecoacoustics partners">
+        {{ range $supporter := .Params.supporters }}
+          <a class="oe-partner{{ with $supporter.logo_shape }} {{ . }}{{ end }}" href="{{ $supporter.href }}" rel="external">
+            {{ partial "footer-logo.html" (dict "src" $supporter.image "alt" $supporter.label) }}
           </a>
         {{ end }}
       </div>
 
-      <div class="footer-columns">
+      <p class="footer-relationship">{{ .Params.relationship }}</p>
+
+      <div class="footer-community-grid">
         <section class="footer-community" aria-labelledby="footer-community-title">
           <h2 class="type-heading-small" id="footer-community-title">{{ .Params.community.title }}</h2>
           <p>{{ .Params.community.description }}</p>
-          <a class="footer-button" href="{{ .Params.community.button_href }}" rel="external">{{ .Params.community.button_label }}</a>
+          <a class="subscribe-button" href="{{ .Params.community.button_href }}" rel="external">{{ .Params.community.button_label }}</a>
         </section>
 
-        {{ range $columnIndex, $column := .Params.columns }}
-          {{ $columnID := printf "footer-column-%d" $columnIndex }}
-          <nav class="footer-navigation" aria-labelledby="{{ $columnID }}">
-            <h2 class="type-heading-small" id="{{ $columnID }}">{{ $column.title }}</h2>
-            <ul>
-              {{ range $column.links }}
-                {{ $href := .href }}
-                {{ $external := (urls.Parse $href).IsAbs }}
-                <li><a href="{{ if $external }}{{ $href }}{{ else }}{{ $href | relURL }}{{ end }}"{{ if $external }} rel="external"{{ end }}>{{ .label }}</a></li>
-              {{ end }}
-            </ul>
-          </nav>
-        {{ end }}
+        <nav class="footer-connect" aria-labelledby="footer-connect-title">
+          <h2 class="type-heading-small" id="footer-connect-title">{{ .Params.connect.title }}</h2>
+          <ul>
+            {{ range .Params.connect.links }}
+              <li><a href="{{ .href }}" rel="external">{{ .label }}</a></li>
+            {{ end }}
+          </ul>
+        </nav>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="site-footer__meta">
+  <div class="ardc-acknowledgement">
     <div class="layout-shell">
       {{ .Content }}
       <p>&copy; {{ now.Format "2006" }} {{ .Params.copyright_owner }} | <a href="{{ .Params.cite.href | relURL }}">{{ .Params.cite.label }}</a></p>
