@@ -1,0 +1,11 @@
+{{- $position := .Get "position" | default "left" -}}
+{{- $background := .Get "background" | default "content" -}}
+{{- $width := .Get "width" | default "50%" -}}
+<section class="media-panel media-panel--{{ $position }} media-panel--{{ $background }}" style="--media-panel-width: {{ $width }};">
+  <figure class="media-panel__media">
+    <img src="{{ .Get "src" }}" alt="{{ .Get "alt" }}" loading="lazy">
+  </figure>
+  <div class="media-panel__content">
+    {{ .Inner | markdownify }}
+  </div>
+</section>

@@ -3,7 +3,7 @@ title: "Contact"
 url: "/contact/"
 ---
 
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+<form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
   <input type="hidden" name="form-name" value="contact">
   <p hidden>
     <label>Don't fill this out: <input name="bot-field"></label>
@@ -29,7 +29,7 @@ url: "/contact/"
     </label>
   </p>
   <p>
-    <label>
+    <label class="contact-form__consent">
       <input type="checkbox" name="consent" value="yes">
       I consent to a follow up email to gather necessary information
     </label>

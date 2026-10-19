@@ -11,16 +11,13 @@ url: "/partners/"
 
 <p>Other A2O stakeholders include universities across Australia, National Parks and other government bodies, the Terrestrial Ecosystem Research Network (TERN), Traditional Owners, the Australian Wildlife Conservancy (AWC), Bush Heritage Australia (BHA), the Tasmanian Land Conservancy and other private conservation organisations, and several private landholders.</p>
 
-<div class="partner-gallery partner-gallery--two">
+<div class="partner-gallery">
   <figure>
     <img src="/wp-content/uploads/2019/06/Queensland-University-of-Technology.jpg" alt="Queensland University of Technology">
   </figure>
   <figure>
     <img src="/wp-content/uploads/2019/06/birdlife.png" alt="Birdlife Australia">
   </figure>
-</div>
-
-<div class="partner-gallery partner-gallery--four">
   <figure>
     <img src="/wp-content/uploads/2019/06/Charles-Sturt-University.jpg" alt="Charles Sturt University">
   </figure>
@@ -33,9 +30,6 @@ url: "/partners/"
   <figure>
     <img src="/wp-content/uploads/2019/06/University-of-Queensland.jpg" alt="University of Queensland">
   </figure>
-</div>
-
-<div class="partner-gallery partner-gallery--four">
   <figure>
     <img src="/wp-content/uploads/2019/06/TERN.png" alt="Terrestrial Ecosystem Research Network">
   </figure>
