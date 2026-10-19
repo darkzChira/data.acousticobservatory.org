@@ -1,10 +1,60 @@
 {{- $images := .images -}}
 {{- if gt (len $images) 0 -}}
-<div class="image-mosaic">
-  {{- range $images }}
-    <figure class="image-mosaic__item">
-      <img src="{{ . }}" alt="{{ $.title }}" loading="lazy">
-    </figure>
-  {{- end }}
-</div>
+  {{- $rows := slice -}}
+  {{- $layout := .layout | default (slice) -}}
+  {{- if gt (len $layout) 0 -}}
+    {{- range $layout -}}
+      {{- $columns := slice -}}
+      {{- range . -}}
+        {{- $columnImages := slice -}}
+        {{- range . -}}
+          {{- $columnImages = $columnImages | append (index $images (sub (int .) 1)) -}}
+        {{- end -}}
+        {{- $columns = $columns | append (dict "images" $columnImages) -}}
+      {{- end -}}
+      {{- $rows = $rows | append (dict "columns" $columns) -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $columns := slice -}}
+    {{- range $index, $image := $images -}}
+      {{- $columns = $columns | append (dict "images" (slice $image)) -}}
+      {{- if or (eq (mod (add $index 1) 3) 0) (eq (add $index 1) (len $images)) -}}
+        {{- $rows = $rows | append (dict "columns" $columns) -}}
+        {{- $columns = slice -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  <div class="image-mosaic">
+    {{- range $rows }}
+      {{- $columns := slice -}}
+      {{- $rowRatio := 0.0 -}}
+      {{- range .columns }}
+        {{- $heightTotal := 0.0 -}}
+        {{- range .images }}
+          {{- $dimensions := imageConfig (printf "static%s" .) -}}
+          {{- $ratio := div (float $dimensions.Width) $dimensions.Height -}}
+          {{- $heightTotal = add $heightTotal (div 1.0 $ratio) -}}
+        {{- end -}}
+        {{- $columnRatio := div 1.0 $heightTotal -}}
+        {{- $rowRatio = add $rowRatio $columnRatio -}}
+        {{- $columns = $columns | append (dict "heightTotal" $heightTotal "images" .images "ratio" $columnRatio) -}}
+      {{- end -}}
+      <div class="image-mosaic__row" style="--row-ratio: {{ $rowRatio }};">
+        {{- range $columns }}
+          <div class="image-mosaic__column" style="--column-ratio: {{ div .ratio $rowRatio }};">
+            {{- $heightTotal := .heightTotal -}}
+            {{- range .images }}
+              {{- $src := . -}}
+              {{- $dimensions := imageConfig (printf "static%s" $src) -}}
+              {{- $ratio := div (float $dimensions.Width) $dimensions.Height -}}
+              <figure style="--image-height-weight: {{ div (div 1.0 $ratio) $heightTotal }};">
+                <img src="{{ $src }}" alt="{{ $.title }}" width="{{ $dimensions.Width }}" height="{{ $dimensions.Height }}" loading="lazy">
+              </figure>
+            {{- end }}
+          </div>
+        {{- end }}
+      </div>
+    {{- end }}
+  </div>
 {{- end -}}

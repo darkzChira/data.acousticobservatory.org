@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <div class="page blog-index">
+    {{ with .Content }}
+      <div class="entry-content">{{ . }}</div>
+    {{ end }}
+
+    {{ $sticky := where .Pages ".Params.sticky" true }}
+    {{ $regular := where .Pages ".Params.sticky" "ne" true }}
+    {{ range union $sticky.ByDate.Reverse $regular.ByDate.Reverse }}
+      <article class="blog-post">
+        <header class="blog-post__header">
+          <h1 class="blog-post__title"><a href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h1>
+          {{ partial "post-meta.html" . }}
+        </header>
+        <div class="entry-content">
+          {{ .Content }}
+        </div>
+      </article>
+    {{ else }}
+      <p>No blog posts have been published yet.</p>
+    {{ end }}
+  </div>
+{{ end }}

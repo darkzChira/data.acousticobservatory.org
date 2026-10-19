@@ -1,0 +1,10 @@
+<div class="blog-post__meta">
+  <span class="blog-post__date">Posted on <a href="{{ .RelPermalink }}" rel="bookmark"><time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time></a></span>
+  {{ with .Params.author }}<span class="blog-post__author">by {{ . }}</span>{{ end }}
+  {{ with .Params.categories }}<span class="blog-post__categories">Posted in
+    {{ range $index, $category := . }}{{ if $index }}, {{ end }}<a href="{{ printf "/categories/%s/" ($category | urlize) }}">{{ $category }}</a>{{ end -}}
+  </span>{{ end }}
+  {{ with .Params.tags }}<span class="blog-post__tags">Tagged
+    {{ range $index, $tag := . }}{{ if $index }}, {{ end }}<a href="{{ printf "/tags/%s/" ($tag | urlize) }}">{{ $tag }}</a>{{ end -}}
+  </span>{{ end }}
+</div>
