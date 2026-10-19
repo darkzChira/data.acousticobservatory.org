@@ -52,11 +52,15 @@ supporters:
   - label: ARDC
     href: https://ardc.edu.au/
     image: /images/ardc_logo.svg
+  - label: TERN
+    href: https://www.tern.org.au/
+    image: /images/tern_logo.png
+    logo_shape: compact
   - label: NCRIS
     href: https://www.education.gov.au/ncris
     image: /images/ncris_logo.svg
     logo_shape: compact
-relationship: The Australian Acoustic Observatory is part of the Open Ecoacoustics platform.
+relationship: The Australian Acoustic Observatory is powered by the Open Ecoacoustics platform.
 community:
   title: Join the Open Ecoacoustics Community
   description: Whether you're a researcher, land manager, student, or wildlife enthusiast, Open Ecoacoustics has something for you. Join the mailing list for regular updates.
